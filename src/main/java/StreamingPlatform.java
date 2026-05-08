@@ -17,7 +17,7 @@ public class StreamingPlatform {
 
     /** Adds a piece of content to the platform library. */
     public void addContent(MediaContent m) {
-        //TODO: replace this line with your code
+        library.add(m);
     }
 
 
@@ -27,7 +27,11 @@ public class StreamingPlatform {
      */
     public List<MediaContent> findByType(String type) {
         List<MediaContent> results = new ArrayList<>();
-        //TODO: replace this line with your code
+        for (MediaContent m : library) {
+            if (m.getContentType().equalsIgnoreCase(type)) {
+                results.add(m);
+            }
+        }
         return results;
     }
 
@@ -36,7 +40,11 @@ public class StreamingPlatform {
      */
     public List<MediaContent> getTopRated(double minRating) {
         List<MediaContent> results = new ArrayList<>();
-        //TODO: replace this line with your code
+        for (MediaContent m : library) {
+            if (m.getRating() >= minRating) {
+                results.add(m);
+            }
+        }
         return results;
     }
 
@@ -72,7 +80,15 @@ public class StreamingPlatform {
         double low  = item.getDuration() * 0.8;
         double high = item.getDuration() * 1.2;
 
-        //TODO: replace this line with your code
+        for (MediaContent m : library) {
+            if (m != item &&
+                    item.getRecommendationTag().equals(m.getRecommendationTag()) &&
+                    m.getDuration() >= low &&
+                    m.getDuration() <= high) {
+
+                recommendations.add(m);
+            }
+        }
         
         return recommendations;
     }
